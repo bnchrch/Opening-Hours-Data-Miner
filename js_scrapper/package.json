@@ -1,0 +1,15 @@
+{
+  "name": "YellowPagesHM",
+  "version": "1.0.0",
+  "description": "using the yellow pages api to retrieve opening and closing hours",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yellow",
+    "pages"
+  ],
+  "author": "ben",
+  "license": "ISC"
+}
