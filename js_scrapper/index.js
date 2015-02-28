@@ -59,8 +59,6 @@ function find_places(request_url) {
 
 var main = function(){
   find_places('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=48.4222,-123.3657&radius=100&key=' + api_key)
-
-
 };
 
 if (require.main === module) {
