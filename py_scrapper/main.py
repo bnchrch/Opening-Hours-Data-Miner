@@ -48,7 +48,7 @@ class find_places(threading.Thread):
     else:
       #No token exists, randomly grab another spot and get the information around it.
       print 'No Token, Relocating Search'
-      find_places(searchNearbyCmd, self.apiKey, {'key' : self.apiKey, 'radius' : '50000' , 'location' : getRandomLoc()}, 3).start()
+      find_places(searchNearbyCmd, self.apiKey, {'key' : self.apiKey, 'radius' : '25000' , 'location' : getRandomLoc()}, 3).start()
 
     for res in results:
       if res.get('opening_hours', 0):
@@ -61,4 +61,4 @@ class find_places(threading.Thread):
 
 #Spawn a thread for each api key
 for key in apiKeys:
-  find_places(searchNearbyCmd, key, {'key' : key, 'radius' : '50000' , 'location' : getRandomLoc()}, 0).start()
+  find_places(searchNearbyCmd, key, {'key' : key, 'radius' : '25000' , 'location' : getRandomLoc()}, 0).start()
