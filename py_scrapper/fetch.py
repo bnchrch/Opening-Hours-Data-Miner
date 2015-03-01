@@ -1,3 +1,5 @@
+#Fetches data from the places (or any) API
+
 import json
 import urllib
 import urllib2

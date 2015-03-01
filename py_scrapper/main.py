@@ -2,6 +2,7 @@ import threading
 import json
 import time
 from fetch import fetch_remote, fetch_remote_json #For fetching data from url
+from location import getRandomLoc
 
 searchNearbyCmd = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
 detailsCmd =      'https://maps.googleapis.com/maps/api/place/details/json?'
@@ -21,7 +22,8 @@ class request_details(threading.Thread):
     params = {'key' : self.apiKey, 'placeid' : self.place_id}
     json = fetch_remote_json(detailsCmd, params);
     response = json[1]
-    print response #Do something with placeId and response here
+    #Do something with placeId and response here
+    print "Response: " + str(response.get('result','NOTHING FOUND'))[:100]+"..." #For debugging dont display the whole string
 
 class find_places(threading.Thread):
   def __init__ (self, req_url, apiKey, params, timeout):
@@ -34,15 +36,19 @@ class find_places(threading.Thread):
   def run(self):
     global has_hours, req_tally
     time.sleep(self.timeout)
-    print self.req_url
     json = fetch_remote_json(self.req_url, self.params)
     response = json[1]
     results = response['results']
     print 'status:' + response['status']
     token = response.get('next_page_token', 0)
-    if token:
+
+    if token: #There is a token (data gets sent in 3 pages, so request data for next page)
       print "Got One: " + token[:64] + "..."
       find_places(searchNearbyCmd, self.apiKey, {'pagetoken' : token, 'key' : self.apiKey}, 3).start()
+    else:
+      #No token exists, randomly grab another spot and get the information around it.
+      print 'No Token, Relocating Search'
+      find_places(searchNearbyCmd, self.apiKey, {'key' : self.apiKey, 'radius' : '50000' , 'location' : getRandomLoc()}, 3).start()
 
     for res in results:
       if res.get('opening_hours', 0):
@@ -55,4 +61,4 @@ class find_places(threading.Thread):
 
 #Spawn a thread for each api key
 for key in apiKeys:
-  find_places(searchNearbyCmd, key, {'key' : key, 'radius' : '100' , 'location' : '48.4222,-123.3657'}, 0).start()
+  find_places(searchNearbyCmd, key, {'key' : key, 'radius' : '50000' , 'location' : getRandomLoc()}, 0).start()
