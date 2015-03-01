@@ -1,7 +1,7 @@
 import threading
 import json
 import time
-from fetch import fetch_remote, fetch_remote_json #For fetching data from url
+from fetch import fetch_remote, fetch_remote_json
 from location import getRandomLoc
 
 searchNearbyCmd = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
@@ -9,8 +9,23 @@ detailsCmd =      'https://maps.googleapis.com/maps/api/place/details/json?'
 req_tally = 0;
 has_hours = 0;
 
+
 #List of all api keys. We should all get one if possible
 apiKeys = ['AIzaSyBB9KLa1_lrVbPGagttplCeVtoWZ5f0d0o']
+
+#Non atomic operations need to be thread safe!
+#When something is required to be thread safe, call with globalLock:
+globalLock = threading.Lock()
+def incReqTally(amt):
+  with globalLock:
+    global req_tally
+    req_tally += amt
+
+def incHasHours(amt):
+  with globalLock:
+    global has_hours
+    has_hours += amt
+
 
 class request_details(threading.Thread):
   def __init__ (self, apiKey, place_id):
@@ -39,7 +54,7 @@ class find_places(threading.Thread):
     json = fetch_remote_json(self.req_url, self.params)
     response = json[1]
     results = response.get('results', [])
-    print 'status:' + response['status']
+    print 'status: ' + response['status']
     token = response.get('next_page_token', 0)
 
     if token: #There is a token (data gets sent in 3 pages, so request data for next page)
@@ -50,12 +65,15 @@ class find_places(threading.Thread):
       print 'No Token, Relocating Search'
       find_places(searchNearbyCmd, self.apiKey, {'key' : self.apiKey, 'radius' : '25000' , 'location' : getRandomLoc()}, 3).start()
 
+    cnt = 0
     for res in results:
       if res.get('opening_hours', 0):
-        has_hours += 1
+        cnt += 1
         request_details(self.apiKey, res['place_id']).start()
+    incHasHours(cnt) #intentionally using a cnter to avoid unneeded locks + unlocks
+    print "With|Out Hours: " + str(cnt) + " | " + str(len(results) - cnt)
 
-    req_tally += len(results)
+    incReqTally(len(results))
     print "Req|HasTally: " + str(req_tally) + " | " + str(has_hours)
 
 
