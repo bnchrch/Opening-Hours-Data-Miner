@@ -38,7 +38,7 @@ class find_places(threading.Thread):
     time.sleep(self.timeout)
     json = fetch_remote_json(self.req_url, self.params)
     response = json[1]
-    results = response['results']
+    results = response.get('results', [])
     print 'status:' + response['status']
     token = response.get('next_page_token', 0)
 
