@@ -43,7 +43,7 @@ class find_places(threading.Thread):
     token = response.get('next_page_token', 0)
 
     if token: #There is a token (data gets sent in 3 pages, so request data for next page)
-      print "Got One: " + token[:64] + "..."
+      print "Token Found: " + token[:64] + "..."
       find_places(searchNearbyCmd, self.apiKey, {'pagetoken' : token, 'key' : self.apiKey}, 3).start()
     else:
       #No token exists, randomly grab another spot and get the information around it.
