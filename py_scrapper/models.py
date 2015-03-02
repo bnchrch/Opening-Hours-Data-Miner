@@ -137,4 +137,6 @@ class PlacesPipeline(object):
     def get_details_by_id(self, place_id):
         session = self.Session()
         q = session.query(PlaceDetails)
-        return q.filter_by(place_id=place_id).first()
+        place = q.filter_by(place_id=place_id).first()
+        session.close()
+        return place

@@ -10,7 +10,7 @@ detailsCmd = 'https://maps.googleapis.com/maps/api/place/details/json?'
 req_tally = 0
 has_hours = 0
 
-
+db = PlacesPipeline()
 #List of all api keys. We should all get one if possible
 apiKeys = ['AIzaSyBB9KLa1_lrVbPGagttplCeVtoWZ5f0d0o']
 
@@ -43,7 +43,7 @@ class request_details(threading.Thread):
     response = json[1]
     result = response.get('result', 'NOTHING FOUND')
     if result:
-        PlacesPipeline().process_details(result)
+        db.process_details(result)
     #Do something with placeId and response here
     #print "Response: " + str(response.get('result', 'NOTHING FOUND'))[:100]+"..." #For debugging dont display the whole string
 
@@ -77,7 +77,7 @@ class find_places(threading.Thread):
         for res in results:
           if res.get('opening_hours', 0):
             cnt += 1
-          if PlacesPipeline().get_details_by_id(res['place_id']) is None:
+          if db.get_details_by_id(res['place_id']) is None:
             request_details(self.apiKey, res['place_id']).start()
           else:
             print 'not new'
