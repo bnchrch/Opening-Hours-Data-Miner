@@ -62,29 +62,30 @@ class find_places(threading.Thread):
     response = json[1]
     results = response.get('results', [])
     print 'status: ' + response['status']
-    token = response.get('next_page_token', 0)
+    if response['status'] != 'OVER_QUERY_LIMIT':
+        token = response.get('next_page_token', 0)
 
-    if token: #There is a token (data gets sent in 3 pages, so request data for next page)
-      print "Token Found: " + token[:64] + "..."
-      find_places(searchNearbyCmd, self.apiKey, {'pagetoken' : token, 'key' : self.apiKey}, 3).start()
-    else:
-      #No token exists, randomly grab another spot and get the information around it.
-      print 'No Token, Relocating Search'
-      find_places(searchNearbyCmd, self.apiKey, {'key' : self.apiKey, 'radius' : '25000' , 'location' : getRandomLoc()}, 3).start()
+        if token: #There is a token (data gets sent in 3 pages, so request data for next page)
+          print "Token Found: " + token[:64] + "..."
+          find_places(searchNearbyCmd, self.apiKey, {'pagetoken' : token, 'key' : self.apiKey}, 3).start()
+        else:
+          #No token exists, randomly grab another spot and get the information around it.
+          print 'No Token, Relocating Search'
+          find_places(searchNearbyCmd, self.apiKey, {'key' : self.apiKey, 'radius' : '25000' , 'location' : getRandomLoc()}, 3).start()
 
-    cnt = 0
-    for res in results:
-      if res.get('opening_hours', 0):
-        cnt += 1
-      if PlacesPipeline().get_details_by_id(res['place_id']) is None:
-        request_details(self.apiKey, res['place_id']).start()
-      else:
-        print 'not new'
-    incHasHours(cnt) #intentionally using a cnter to avoid unneeded locks + unlocks
-    print "With|Out Hours: " + str(cnt) + " | " + str(len(results) - cnt)
+        cnt = 0
+        for res in results:
+          if res.get('opening_hours', 0):
+            cnt += 1
+          if PlacesPipeline().get_details_by_id(res['place_id']) is None:
+            request_details(self.apiKey, res['place_id']).start()
+          else:
+            print 'not new'
+        incHasHours(cnt) #intentionally using a cnter to avoid unneeded locks + unlocks
+        print "With|Out Hours: " + str(cnt) + " | " + str(len(results) - cnt)
 
-    incReqTally(len(results))
-    print "Req|HasTally: " + str(req_tally) + " | " + str(has_hours)
+        incReqTally(len(results))
+        print "Req|HasTally: " + str(req_tally) + " | " + str(has_hours)
 
 
 
