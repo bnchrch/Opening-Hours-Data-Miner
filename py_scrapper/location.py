@@ -1,9 +1,19 @@
-from random import randint
+from random import randint, choice
+
+#not in use...
+def get_location_from_results(results):
+    result = choice(results)
+    lat = result.get('geometry', {}).get('location', {}).get('lat', {})
+    lng = result.get('geometry', {}).get('location', {}).get('lng', {})
+    if lat and lng:
+        return str(lat) + "," + str(lng)
+    else:
+        return getRandomLoc()
 
 #Currently defined to be a random spot in North america (roughly)
 def getRandomLoc():
-  la = str(randint(31, 55))    #Lat
-  lo = str(randint(-126, -65)) #Long
+  la = str(randint(32, 49))    #Lat
+  lo = str(randint(-124, -113)) #Long
 
   #Decimal parts of the lat/long ()
   decLa = str(randint(0, 9999))

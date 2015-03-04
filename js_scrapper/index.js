@@ -10,18 +10,18 @@ var has_hours = 0;
 
 function request_details(place_id) {
   var request_url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+place_id+'&key=' + api_key
-  request(request_url, function (error, response, body) {
+    console.log(request_url)
+    request(request_url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       var obj = JSON.parse(body)
       //console.log(obj.result.opening_hours.periods)
-      console.log(obj)
     }
     else {
-      console.log(body)
       console.log(error)
     }
   })
 }
+
 function find_places(request_url) {
   console.log(request_url);
   request(request_url,
