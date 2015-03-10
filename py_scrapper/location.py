@@ -16,8 +16,8 @@ def getRandomLoc():
   lo = str(randint(-124, -113)) #Long
 
   #Decimal parts of the lat/long ()
-  decLa = str(randint(0, 9999))
-  decLo = str(randint(0, 9999))
+  decLa = str(randint(0, 999))
+  decLo = str(randint(0, 999))
 
   la = la + "." + decLa
   lo = lo + "." + decLo

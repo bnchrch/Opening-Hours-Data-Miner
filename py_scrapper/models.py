@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Numeric, ForeignKey, PrimaryKeyConstraint
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.engine.url import URL
+import random
 
 import settings
 from sqlalchemy.orm import sessionmaker
@@ -81,6 +82,9 @@ class PlacesPipeline(object):
         engine = db_connect()
         create_tables(engine)
         self.Session = sessionmaker(bind=engine)
+        session = self.Session()
+        self.values =[str(value[0]) for value in session.query(PlaceTypes.type_title).distinct()]
+        session.close()
 
     def process_details(self, detail_json):
         """Save deals in the database.
@@ -140,3 +144,8 @@ class PlacesPipeline(object):
         place = q.filter_by(place_id=place_id).first()
         session.close()
         return place
+
+    def get_type_string_for_query(self, num=5):
+        return "|".join(random.sample(self.values, num))
+
+
