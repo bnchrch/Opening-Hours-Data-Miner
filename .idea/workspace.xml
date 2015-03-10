@@ -5,7 +5,7 @@
     <ignored path="project.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/index.js" changelist="3a59d7ad-9dab-4966-a899-78fe5423536b" time="1425252653414" ignored="false" />
-    <file path="/settings.py" changelist="3a59d7ad-9dab-4966-a899-78fe5423536b" time="1425255127015" ignored="false" />
+    <file path="/settings.py" changelist="3a59d7ad-9dab-4966-a899-78fe5423536b" time="1426029691360" ignored="false" />
     <file path="/models.py" changelist="3a59d7ad-9dab-4966-a899-78fe5423536b" time="1426029252390" ignored="false" />
     <file path="/main.py" changelist="3a59d7ad-9dab-4966-a899-78fe5423536b" time="1426029335566" ignored="false" />
     <file path="/pipline.py" changelist="3a59d7ad-9dab-4966-a899-78fe5423536b" time="1425260348976" ignored="false" />
@@ -59,19 +59,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="location.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="location.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/py_scrapper/location.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="28" selection-start="591" selection-end="591" vertical-scroll-proportion="0.45">
+            <state line="14" column="25" selection-start="477" selection-end="477" vertical-scroll-proportion="-8.4">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/py_scrapper/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="33" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0">
+            <state line="5" column="23" selection-start="135" selection-end="135" vertical-scroll-proportion="0.125">
               <folding />
             </state>
           </provider>
@@ -97,11 +97,11 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/js_scrapper/index.js" />
-        <option value="$PROJECT_DIR$/py_scrapper/settings.py" />
         <option value="$PROJECT_DIR$/py_scrapper/pipline.py" />
         <option value="$PROJECT_DIR$/py_scrapper/models.py" />
         <option value="$PROJECT_DIR$/py_scrapper/main.py" />
         <option value="$PROJECT_DIR$/py_scrapper/location.py" />
+        <option value="$PROJECT_DIR$/py_scrapper/settings.py" />
       </list>
     </option>
   </component>
@@ -376,13 +376,6 @@
         <state line="52" column="0" selection-start="1396" selection-end="1706" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/py_scrapper/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="33" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js_scrapper/config/config.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -420,7 +413,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/py_scrapper/location.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="28" selection-start="591" selection-end="591" vertical-scroll-proportion="0.45">
+        <state line="14" column="25" selection-start="477" selection-end="477" vertical-scroll-proportion="-8.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/py_scrapper/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="23" selection-start="135" selection-end="135" vertical-scroll-proportion="0.125">
           <folding />
         </state>
       </provider>
