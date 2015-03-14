@@ -67,11 +67,13 @@ class find_places(threading.Thread):
 
         if token: #There is a token (data gets sent in 3 pages, so request data for next page)
           print "Token Found: " + token[:64] + "..."
-          find_places(searchNearbyCmd, self.apiKey, {'pagetoken' : token, 'key' : self.apiKey}, 3).start()
+          find_places(searchNearbyCmd, self.apiKey, {'key': self.apiKey, 'radius': '10000', 'location': getRandomLoc()}, 3).start()
+          #find_places(searchNearbyCmd, self.apiKey, {'pagetoken' : token, 'key' : self.apiKey}, 3).start()
         else:
           #No token exists, randomly grab another spot and get the information around it.
           print 'No Token, Relocating Search'
-          find_places(searchNearbyCmd, self.apiKey, {'key': self.apiKey, 'rankby': 'distance', 'types': db.get_type_string_for_query(), 'location': getRandomLoc()}, 3).start()
+          find_places(searchNearbyCmd, self.apiKey, {'key': self.apiKey, 'radius': '10000', 'location': getRandomLoc()}, 3).start()
+          #find_places(searchNearbyCmd, self.apiKey, {'key': self.apiKey, 'rankby': 'distance', 'types': db.get_type_string_for_query(), 'location': getRandomLoc()}, 3).start()
 
         cnt = 0
         for res in results:
@@ -95,7 +97,8 @@ class find_places(threading.Thread):
 
 def main():
     for key in apiKeys:
-        find_places(searchNearbyCmd, key, {'key': key, 'rankby': 'distance', 'types': db.get_type_string_for_query(),'location' : getRandomLoc()}, 0).start()
+        find_places(searchNearbyCmd, key, {'key': key, 'radius': '10000', 'location': getRandomLoc()}, 3).start()
+        #find_places(searchNearbyCmd, key, {'key': key, 'rankby': 'distance', 'types': db.get_type_string_for_query(),'location' : getRandomLoc()}, 0).start()
 
 if __name__ == "__main__":
     main()

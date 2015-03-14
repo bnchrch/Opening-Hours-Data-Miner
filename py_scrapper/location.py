@@ -12,8 +12,8 @@ def get_location_from_results(results):
 
 #Currently defined to be a random spot in North america (roughly)
 def getRandomLoc():
-  la = str(randint(31, 55))    #Lat
-  lo = str(randint(-126, -65)) #Long
+  la = str(randint(37, 52))    #Lat
+  lo = str(randint(-4, 24)) #Long
 
   #Decimal parts of the lat/long ()
   decLa = str(randint(0, 9999))
