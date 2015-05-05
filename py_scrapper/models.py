@@ -61,16 +61,13 @@ class PlaceHours(DeclarativeBase):
     __table_args__ = (PrimaryKeyConstraint('place_id', 'day', name='place_hours_pk'),)
 
 
-
 class PlaceTypes(DeclarativeBase):
-    """Sqlalchemy place hours model"""
+    """Sqlalchemy place types model"""
     __tablename__ = "place_types"
 
     place_id = Column(String, ForeignKey("place_details.place_id"))
     type_title = Column('type_title', String)
     __table_args__ = (PrimaryKeyConstraint('place_id', 'type_title', name='place_types_pk'),)
-
-
 
 
 class PlacesPipeline(object):
