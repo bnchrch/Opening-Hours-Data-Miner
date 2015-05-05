@@ -18,6 +18,7 @@ To determine the operating hours of buisnesses based on their geographic locatio
 * Python 2
 * SQL Alchemy
 * PostgreSQL
+* Weka
 * Digital Ocean
 
 ### Discoveries
