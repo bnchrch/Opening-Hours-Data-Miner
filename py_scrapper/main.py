@@ -9,9 +9,8 @@ searchNearbyCmd = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?
 detailsCmd = 'https://maps.googleapis.com/maps/api/place/details/json?'
 
 db = PlacesPipeline()
-#List of all api keys. We should all get one if possible
-apiKeys = ['AIzaSyBB9KLa1_lrVbPGagttplCeVtoWZ5f0d0o','AIzaSyAMWj290YncOAX-gXT7MIYVe6bFrFJiNV0','AIzaSyDh5XIIfk9r-g_Gb-wcgqehv-0CNkRNfgg']
-
+#List of all api keys
+apiKeys = [] 
 #Non atomic operations need to be thread safe!
 #When something is required to be thread safe, call with globalLock:
 globalLock = threading.Lock()
