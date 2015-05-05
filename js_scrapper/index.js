@@ -3,7 +3,7 @@ var request = require('request');
 
 
 
-api_key = 'AIzaSyBB9KLa1_lrVbPGagttplCeVtoWZ5f0d0o'
+api_key = ''
 var request_tally = 0;
 var has_hours = 0;
 
